@@ -2,6 +2,7 @@ package dev.newbcoder_f5.araararauna.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.newbcoder_f5.araararauna.request.EmployeeRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,22 +27,15 @@ public class Employee {
     @Column(name = "employee_id")
     private Long id;
 
-    @NotBlank(message = "name should not be null/empty")
     private String name;
 
-    private Long age = 0L;
-    private String location;
-    private String email;
+    @JoinColumn(name = "department_id")
+    @OneToOne
+    private Department department;
 
-    @NotBlank(message = "department should not be null/empty")
-    private String department;
+    public Employee(EmployeeRequest employeeRequest) {
+        this.name = employeeRequest.getName();
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date created_at;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Date updated_at;
+    }
 
 }

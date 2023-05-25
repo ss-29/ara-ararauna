@@ -49,34 +49,4 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    @Override
-    public List<Employee> getEmployeesByName(String name) {
-        return employeeRepository.findByName(name);
-    }
-
-    @Override
-    public List<Employee> getEmployeesByNameAndLocation(String name, String location) {
-        return employeeRepository.findByNameAndLocation(name, location);
-    }
-
-    @Override
-    public List<Employee> getEmployeesByNameKeyword(String keyword) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        return employeeRepository.findByNameContaining(keyword, sort);
-    }
-
-    @Override
-    public List<Employee> getEmployeesByNameOrLocation(String name, String location) {
-        return employeeRepository.findByNameOrLocation(name, location);
-    }
-
-    @Override
-    public List<Employee> getEmployeesByNameOrLocationCustom(String name, String location) {
-        return employeeRepository.getEmployeesByNameAndLocationCustom(name, location);
-    }
-
-    @Override
-    public Integer deleteEmployeesByNameCustom(String name) {
-        return employeeRepository.deleteEmployeeByName(name);
-    }
 }
