@@ -160,3 +160,9 @@ if the delete query deletes 2 records then it return 2
 ### Timestamp 3:54:44
 whenever we are writing JPQL queries, that is modifying queries (create update delete), we should annotate with
 ***@Modifying*** annotation and also ***@Transactional*** annotation from *org.springframework.* and not *javax.transaction*
+
+### Timestamp 4:16:56
+since we have created a '*parameterized constructor*' in Employee.java, therefore we have to create a *no argument constructor* which can be done using lombok ***NoArgsConstructor*** annotation
+
+### Timestamp 4:18:14
+the property **spring.jpa.show-sql=true** shows the query run in the backend, in the console

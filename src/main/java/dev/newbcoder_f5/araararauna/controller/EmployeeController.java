@@ -68,4 +68,10 @@ public class EmployeeController {
         return employeeService.updateEmployee(employee);
     }
 
+    @GetMapping("/employees/filter/department")
+    public ResponseEntity<List<Employee>> getEmployeesByDepartment(@RequestParam String name) {
+//        return new ResponseEntity<List<Employee>>(employeeRepository.findByDepartmentName(name), HttpStatus.OK);
+        return new ResponseEntity<List<Employee>>(employeeRepository.getEmployeesByDepartmentName(name), HttpStatus.OK);
+    }
+
 }
