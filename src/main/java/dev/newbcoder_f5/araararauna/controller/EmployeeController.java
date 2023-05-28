@@ -47,18 +47,35 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody EmployeeRequest eRequest) {
-        Department dept = new Department();
-        dept.setName(eRequest.getDepartment());
-
-        dept = departmentRepository.save(dept);
+    public ResponseEntity<String> saveEmployee(@Valid @RequestBody EmployeeRequest eRequest) {
+//        Department dept = new Department();
+//        dept.setName(eRequest.getDepartment());
+//
+//        dept = departmentRepository.save(dept);
+//
+//        Employee employee = new Employee(eRequest);
+//        employee.setDepartment(dept);
+//
+//        employeeRepository.save(employee);
+//
+//        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 
         Employee employee = new Employee(eRequest);
-        employee.setDepartment(dept);
-
         employeeRepository.save(employee);
 
-        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
+        for (String s : eRequest.getDepartment()) {
+
+            Department dept = new Department();
+            dept.setName(s);
+            dept.setEmployee(employee);
+
+            departmentRepository.save(dept);
+
+        }
+
+        return new ResponseEntity<String>("record saved successfully", HttpStatus.CREATED);
+
+//        return null;
 
     }
 
@@ -66,12 +83,6 @@ public class EmployeeController {
     public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         employee.setId(id);
         return employeeService.updateEmployee(employee);
-    }
-
-    @GetMapping("/employees/filter/department")
-    public ResponseEntity<List<Employee>> getEmployeesByDepartment(@RequestParam String name) {
-//        return new ResponseEntity<List<Employee>>(employeeRepository.findByDepartmentName(name), HttpStatus.OK);
-        return new ResponseEntity<List<Employee>>(employeeRepository.getEmployeesByDepartmentName(name), HttpStatus.OK);
     }
 
 }

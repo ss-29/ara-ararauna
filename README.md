@@ -166,3 +166,6 @@ since we have created a '*parameterized constructor*' in Employee.java, therefor
 
 ### Timestamp 4:18:14
 the property **spring.jpa.show-sql=true** shows the query run in the backend, in the console
+
+### Timestamp 4:22:38
+going to discuss about one to many mapping, but this time, each *employee belongs to multiple department*, therefore one to many mapping and scenario is changed
